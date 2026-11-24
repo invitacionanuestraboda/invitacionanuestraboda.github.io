@@ -140,14 +140,18 @@ section>.wrap,section>.carril{position:relative;z-index:1}
 .hora{font-style:italic;font-size:1.18rem;color:var(--cafe-2)}
 
 /* ===== BANDA PANORÁMICA ===== */
-#banda{height:min(78svh,720px);padding:0;overflow:hidden;display:grid;place-items:center;background:var(--cafe)}
-#banda .foto{position:absolute;inset:0;background:url('pan.jpg') center 18%/cover no-repeat}
-#banda .foto video{object-position:center 18%}
-#banda::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(40,28,20,0) 45%,rgba(34,24,16,.72))}
-#banda{place-items:end center}#banda .cap{padding-bottom:44px}
-#banda .cap{position:relative;z-index:2;color:#f7f1e2;padding:0 24px}
-#banda .cap b{display:block;font-family:var(--script);font-size:clamp(2.7rem,11.5vw,4.1rem);font-weight:400;line-height:1.1;
-  text-shadow:0 3px 22px rgba(0,0,0,.4)}
+#banda{height:min(96svh,900px);padding:0;overflow:hidden;display:grid;place-items:start center;background:#f3ece4}
+#banda .foto{position:absolute;inset:0;background:url('pan.jpg') center bottom/cover no-repeat}
+#banda .cap{position:relative;z-index:2;color:var(--cafe);padding:11svh 24px 0}
+#banda .cap .sans{color:var(--cafe-2)}
+#banda .cap b{display:block;font-family:var(--script);font-size:clamp(2.7rem,11.5vw,4.1rem);font-weight:400;line-height:1.1}
+@media (min-width:560px){
+  #banda{height:min(100svh,940px)}
+  /* los lados continúan el mismo horizonte: la foto estirada a lo ancho, alineada en altura */
+  #banda::before{content:"";position:absolute;inset:0 -30px;background:url('pan-lados.jpg') center/100% 100% no-repeat;filter:blur(7px)}
+  #banda .foto{background-size:auto 100%;background-position:center bottom;
+    -webkit-mask-image:linear-gradient(to right,transparent calc(50% - 27svh),#000 calc(50% - 17svh),#000 calc(50% + 17svh),transparent calc(50% + 27svh));
+    mask-image:linear-gradient(to right,transparent calc(50% - 27svh),#000 calc(50% - 17svh),#000 calc(50% + 17svh),transparent calc(50% + 27svh))}}
 
 /* ===== CUENTA REGRESIVA ===== */
 #cuenta{background:#53582f url('tex-verde.jpg') repeat;background-size:512px;color:#f7f1df;overflow:hidden}
