@@ -87,6 +87,24 @@ section{position:relative;padding:92px 24px;text-align:center}
 .btn-borde{background:transparent;color:var(--cafe);border:1px solid var(--cafe)}
 .botones{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:24px}
 
+/* ===== FOTOS TENUES DE FONDO ===== */
+.velo{position:absolute;inset:0;pointer-events:none;background:var(--img) var(--pos,50% 30%)/cover no-repeat;
+  opacity:.2;mix-blend-mode:multiply;filter:sepia(.3) contrast(1.05);
+  -webkit-mask-image:linear-gradient(transparent,#000 16%,#000 84%,transparent);mask-image:linear-gradient(transparent,#000 16%,#000 84%,transparent)}
+.velo.osc{mix-blend-mode:luminosity;opacity:.3;filter:contrast(1.1)}
+section>.wrap,section>.carril{position:relative;z-index:1}
+@media (min-width:900px){
+  .velo{inset:0 0 0 auto;width:46%;background-position:var(--pos,50% 30%);
+    -webkit-mask-image:radial-gradient(ellipse 62% 70% at 50% 50%,#000 30%,transparent 100%);mask-image:radial-gradient(ellipse 62% 70% at 50% 50%,#000 30%,transparent 100%)}
+  .velo.izq{inset:0 auto 0 0}}
+#banda2{height:min(74svh,680px);padding:0;overflow:hidden;display:grid;place-items:end center;background:var(--cafe)}
+#banda2 .foto{position:absolute;inset:0;background:url('g5.jpg') 50% 52%/cover no-repeat}
+#banda2::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(40,28,20,0) 50%,rgba(34,24,16,.78))}
+#banda2 .cap{position:relative;z-index:2;color:#f7f1e2;padding:0 24px 44px}
+#banda2 .cap b{display:block;font-family:var(--script);font-size:clamp(3.4rem,13.5vw,5rem);font-weight:400;line-height:1;text-shadow:0 3px 22px rgba(0,0,0,.4)}
+@media (min-width:900px){#banda2 .foto{background-position:50% 55%}
+  #hero .foto{background-position:50% 22%}#hero .foto video{object-position:50% 22%}}
+
 /* ===== HERO ===== */
 #hero{min-height:100svh;padding:0;display:grid;place-items:end center;color:#fff;overflow:hidden;background:var(--cafe)}
 #hero .foto{position:absolute;inset:-7% 0;background:url('hero.jpg') center 30%/cover no-repeat;will-change:transform}
@@ -190,6 +208,7 @@ section{position:relative;padding:92px 24px;text-align:center}
 .carril{display:flex;gap:16px;padding:32px 24px 14px;overflow-x:auto;scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;scrollbar-width:none}
 .carril::-webkit-scrollbar{display:none}
+@media (min-width:900px){.carril{max-width:1200px;margin:0 auto;flex-wrap:wrap;justify-content:center;overflow:visible;gap:26px 22px}.polaroid{flex:0 0 250px}.pista{visibility:hidden}}
 .polaroid{flex:0 0 70%;max-width:290px;scroll-snap-align:center;background:#fff;padding:12px 12px 16px;border:0;
   box-shadow:0 14px 32px rgba(58,42,32,.22);transform:rotate(var(--r,-2deg));transition:transform .4s;cursor:pointer}
 .polaroid:hover{transform:rotate(0) scale(1.03)}
@@ -291,6 +310,7 @@ section{position:relative;padding:92px 24px;text-align:center}
 
 <!-- INVITACIÓN -->
 <section id="texto">
+  <div class="velo" style="--img:url('g6.jpg');--pos:50% 32%;--posd:88% 28%"></div>
   <div class="wrap">
     <p class="rev">Con gran alegría y agradecidos con Dios, los invitamos a compartir el día en que unimos nuestras vidas en matrimonio.</p>
     <div class="divisor rev d1"><i>♥</i></div>
@@ -314,6 +334,7 @@ section{position:relative;padding:92px 24px;text-align:center}
 
 <!-- CUENTA REGRESIVA -->
 <section id="cuenta">
+  <div class="velo osc izq" style="--img:url('g3.jpg');--pos:50% 33%;--posd:12% 30%"></div>
   <div class="wrap">
     <span class="sans eyebrow rev">Cuenta regresiva</span>
     <h2 class="titulo rev d1">Falta muy poco</h2>
@@ -333,6 +354,7 @@ section{position:relative;padding:92px 24px;text-align:center}
 
 <!-- LUGAR -->
 <section id="lugar">
+  <div class="velo" style="--img:url('g8.jpg');--pos:50% 46%;--posd:88% 44%"></div>
   <div class="wrap">
     <span class="sans eyebrow rev">Ceremonia y celebración</span>
     <h2 class="titulo rev d1">Dónde &amp; cuándo</h2>
@@ -350,6 +372,7 @@ section{position:relative;padding:92px 24px;text-align:center}
 
 <!-- PROGRAMA -->
 <section id="programa">
+  <div class="velo osc" style="--img:url('g2.jpg');--pos:50% 30%;--posd:88% 30%"></div>
   <svg class="colgante" style="left:0" viewBox="0 0 150 340" aria-hidden="true"><use href="#colgSvg"/></svg>
   <svg class="colgante" style="right:0;transform:scaleX(-1)" viewBox="0 0 150 340" aria-hidden="true"><use href="#colgSvg"/></svg>
   <div class="wrap">
@@ -367,6 +390,7 @@ section{position:relative;padding:92px 24px;text-align:center}
 
 <!-- VESTUARIO -->
 <section id="vestuario">
+  <div class="velo izq" style="--img:url('g4.jpg');--pos:50% 62%;--posd:12% 62%"></div>
   <div class="wrap">
     <span class="sans eyebrow rev">Código de vestuario</span>
     <h2 class="titulo rev d1">Formal</h2>
@@ -390,8 +414,18 @@ section{position:relative;padding:92px 24px;text-align:center}
   <div class="carril rev d2" id="carril"></div>
 </section>
 
+<!-- BANDA 2 -->
+<section id="banda2">
+  <div class="foto"></div>
+  <div class="cap rev">
+    <span class="sans">Ese día</span>
+    <b>Queremos celebrarlo<br>contigo</b>
+  </div>
+</section>
+
 <!-- RSVP -->
 <section id="rsvp">
+  <div class="velo osc" style="--img:url('g7.jpg');--pos:50% 38%;--posd:88% 36%"></div>
   <div class="wrap">
     <span class="sans eyebrow rev">Confirmación</span>
     <h2 class="titulo rev d1">¿Nos acompañas?</h2>
@@ -488,14 +522,14 @@ const BODA = {
 };
 // ====== FOTOS DE LA GALERÍA ======
 const FOTOS = [
-  {f:'g1.jpg', t:'Nuestro baile',  p:'center 30%'},
-  {f:'g2.jpg', t:'Entre nosotros', p:'center 25%'},
-  {f:'g7.jpg', t:'El sí',          p:'center 28%'},
-  {f:'g3.jpg', t:'Siempre juntos', p:'center 22%'},
-  {f:'g4.jpg', t:'De la mano',     p:'center 45%'},
-  {f:'g6.jpg', t:'Mirando arriba', p:'center 28%'},
-  {f:'g5.jpg', t:'Nuestra ciudad', p:'center 35%'},
-  {f:'g8.jpg', t:'Contigo',        p:'center 32%'}
+  {f:'g1.jpg', t:'Nuestro baile',  p:'50% 30%'},
+  {f:'g2.jpg', t:'Entre nosotros', p:'50% 30%'},
+  {f:'g7.jpg', t:'El sí',          p:'50% 40%'},
+  {f:'g3.jpg', t:'Siempre juntos', p:'50% 30%'},
+  {f:'g4.jpg', t:'De la mano',     p:'50% 68%'},
+  {f:'g6.jpg', t:'Mirando arriba', p:'50% 34%'},
+  {f:'g5.jpg', t:'Nuestra ciudad', p:'50% 55%'},
+  {f:'g8.jpg', t:'Contigo',        p:'50% 46%'}
 ];
 const $ = s => document.querySelector(s);
 const pad = n => String(n).padStart(2,'0');
