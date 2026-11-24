@@ -176,6 +176,11 @@ section>.wrap,section>.carril{position:relative;z-index:1}
 .tarjeta p{color:var(--cafe-2)}
 .hora-grande{font-family:var(--script);font-size:3.4rem;line-height:1;color:var(--verde)}
 
+.ruta{margin:22px 0 6px;border:1px solid var(--oro);border-radius:4px;overflow:hidden;background:#e9e2cf}
+.ruta iframe{display:block;width:100%;height:300px;border:0}
+.ruta-nota{font-family:var(--sans);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cafe-2)}
+@media (min-width:900px){.ruta iframe{height:340px}}
+
 /* ===== PROGRAMA ===== */
 #programa{background:#33231a url('tex-cafe.jpg') repeat;background-size:512px;color:#f3ead6;overflow:hidden}
 #programa .titulo{color:#f7f1df}#programa .eyebrow{color:var(--verde-claro)}
@@ -248,7 +253,7 @@ section>.wrap,section>.carril{position:relative;z-index:1}
 .opciones{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
 .op{flex:1 1 130px;position:relative}
 .op input{position:absolute;opacity:0;pointer-events:none}
-.op span{display:block;text-align:center;border:1px solid var(--verde);border-radius:14px;padding:13px 8px;cursor:pointer;
+.op span{display:block;text-align:center;font-family:var(--serif);text-transform:none;letter-spacing:0;color:var(--cafe);border:1px solid var(--verde);border-radius:14px;padding:13px 8px;cursor:pointer;
   transition:all .25s;font-size:1.04rem}
 .op input:checked+span{background:var(--cafe);color:#f5f1e6;border-color:var(--cafe);transform:translateY(-2px)}
 .op input:focus-visible+span{outline:2px solid var(--oro);outline-offset:2px}
@@ -257,6 +262,10 @@ section>.wrap,section>.carril{position:relative;z-index:1}
   cursor:pointer;color:var(--cafe);line-height:1}
 .contador output{font-size:2.3rem;min-width:44px;text-align:center}
 .extra{display:none}.extra.ver{display:block}
+.cupos .op{flex:1 1 52px}
+.cupo-fijo{text-align:center;font-size:1.12rem;margin:0 0 20px;padding:12px;border:1px dashed var(--oro);border-radius:12px}
+.cupo-nota{font-size:.95rem;font-style:italic;color:var(--cafe-2);margin:-8px 0 22px;line-height:1.4}
+#acompLista input{margin-bottom:14px}#acomp{margin-bottom:6px}
 .form .btn{width:100%}
 .aviso{font-size:.93rem;color:var(--cafe-2);font-style:italic;margin-top:14px;text-align:center}
 .confirma{display:none;text-align:center;padding:18px 8px}
@@ -371,9 +380,16 @@ section>.wrap,section>.carril{position:relative;z-index:1}
       <h3>Ceremonia civil y religiosa</h3>
       <p>Celebración con cena y música<br>en el mismo lugar</p>
       <div class="divisor"><i>♥</i></div>
-      <p class="sans" style="color:var(--cafe-2)">Cielo Eventos y Alquiler</p>
-      <p style="margin-top:6px">Yopal, Casanare</p>
-      <div class="botones"><a class="btn btn-cafe" id="btnMapa" href="#" target="_blank" rel="noopener">Ver ubicación</a></div>
+      <p class="sans" style="color:var(--cafe-2)">Casa Cuva</p>
+      <p style="margin-top:6px">Km 13, Yopal, Casanare</p>
+      <div class="ruta">
+        <iframe id="mapaRuta" title="Ruta de Yopal a Casa Cuva" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+      <p class="ruta-nota">Ruta desde el centro de Yopal</p>
+      <div class="botones">
+        <a class="btn btn-cafe" id="btnRuta" href="#" target="_blank" rel="noopener">Cómo llegar desde Yopal</a>
+        <a class="btn btn-borde" id="btnMapa" href="#" target="_blank" rel="noopener">Ver ubicación</a>
+      </div>
     </div>
   </div>
 </section>
@@ -450,12 +466,21 @@ section>.wrap,section>.carril{position:relative;z-index:1}
       </div>
 
       <div class="extra ver" id="extraSi">
-        <label>¿Cuántas personas?</label>
-        <div class="contador">
-          <button type="button" id="menos" aria-label="Menos">−</button>
-          <output id="num">1</output>
-          <button type="button" id="mas" aria-label="Más">+</button>
+        <div id="cupoElige">
+          <label>Cupo de tu invitación</label>
+          <div class="opciones cupos">
+            <label class="op"><input type="radio" name="cupo" value="1" checked><span>1</span></label>
+            <label class="op"><input type="radio" name="cupo" value="2"><span>2</span></label>
+            <label class="op"><input type="radio" name="cupo" value="3"><span>3</span></label>
+            <label class="op"><input type="radio" name="cupo" value="4"><span>4</span></label>
+          </div>
         </div>
+        <p class="cupo-fijo" id="cupoFijo" hidden></p>
+        <div id="acomp">
+          <label>Nombres de quienes te acompañan</label>
+          <div id="acompLista"></div>
+        </div>
+        <p class="cupo-nota">Escribe el nombre de cada persona que asistirá. Solo puedes registrar la cantidad de personas del cupo que te indicamos en el mensaje de invitación.</p>
         <label for="aviso">Restricción alimentaria o mensaje (opcional)</label>
         <input type="text" id="aviso" placeholder="Escríbenos lo que quieras">
       </div>
@@ -525,8 +550,10 @@ section>.wrap,section>.carril{position:relative;z-index:1}
 const BODA = {
   fecha: new Date('2026-12-19T16:00:00-05:00'),
   fin:   new Date('2026-12-19T19:00:00-05:00'),
-  lugar: 'Cielo Eventos y Alquiler, Yopal, Casanare',
-  mapa:  'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Cielo Eventos y Alquiler Yopal Casanare')
+  lugar: 'Casa Cuva, km 13, Yopal, Casanare',
+  mapa:  'https://maps.app.goo.gl/vZD1hXp6ZGYrpojY8',
+  destino: '5.2174933,-72.3833736',          // coordenadas de Casa Cuva
+  origen: 'Yopal, Casanare, Colombia'
 };
 // ====== FOTOS DE LA GALERÍA ======
 const FOTOS = [
@@ -571,7 +598,7 @@ function abrir(){
   sobre.classList.add('abierto');
   document.body.classList.remove('bloqueado');
   window.scrollTo(0,0);
-  lanzarHojas(70);
+  lanzarHojas(16);
   setTimeout(()=>sobre.setAttribute('aria-hidden','true'),1800);
 }
 $('#abrir').addEventListener('click',abrir);
@@ -587,9 +614,9 @@ const colores=['#6f7742','#53582f','#8f975c','#454a27','#c2a060'];
 let hojas=[];
 const nueva = (arriba=true) => ({ x:Math.random()*W, y: arriba? -20*dpr : Math.random()*H,
   s:(7+Math.random()*10)*dpr, v:(.5+Math.random()*1.1)*dpr, sw:Math.random()*6.28, sv:.01+Math.random()*.02,
-  r:Math.random()*6.28, rv:(Math.random()-.5)*.03, c:colores[(Math.random()*colores.length)|0], a:.4+Math.random()*.3 });
+  r:Math.random()*6.28, rv:(Math.random()-.5)*.03, c:colores[(Math.random()*colores.length)|0], a:.3+Math.random()*.28 });
 function lanzarHojas(n){ for(let i=0;i<n;i++){ const h=nueva(false); h.y=-Math.random()*H*.6; hojas.push(h); } }
-for(let i=0;i<14;i++) hojas.push(nueva(false));
+for(let i=0;i<5;i++) hojas.push(nueva(false));
 const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
 function dibujar(){
   cx.clearRect(0,0,W,H);
@@ -599,7 +626,7 @@ function dibujar(){
     cx.beginPath(); cx.moveTo(0,-h.s); cx.quadraticCurveTo(h.s*.7,0,0,h.s); cx.quadraticCurveTo(-h.s*.7,0,0,-h.s); cx.fill();
     cx.strokeStyle='rgba(58,42,32,.25)'; cx.lineWidth=dpr*.8;
     cx.beginPath(); cx.moveTo(0,-h.s); cx.lineTo(0,h.s); cx.stroke(); cx.restore();
-    if(h.y>H+30*dpr){ if(hojas.length>16) hojas.splice(i,1); else hojas[i]=nueva(); }
+    if(h.y>H+30*dpr){ if(hojas.length>6) hojas.splice(i,1); else hojas[i]=nueva(); }
   });
   requestAnimationFrame(dibujar);
 }
@@ -651,11 +678,30 @@ if(!window.claude){ $('#btnIcs').hidden=false; $('#btnIcs').addEventListener('cl
   a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'})); a.download='boda-adrian-fernanda.ics'; a.click();
 }); }
 $('#btnMapa').href=BODA.mapa;
+$('#btnRuta').href='https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(BODA.origen)+'&destination='+BODA.destino+'&travelmode=driving';
+$('#mapaRuta').src='https://www.google.com/maps?saddr='+encodeURIComponent(BODA.origen)+'&daddr='+BODA.destino+'&hl=es&output=embed';
 
 // ====== RSVP ======
-let n=1; const num=$('#num');
-$('#mas').onclick=()=>{ n=Math.min(n+1,6); num.textContent=n; };
-$('#menos').onclick=()=>{ n=Math.max(n-1,1); num.textContent=n; };
+// Cupo: llega en el enlace (?cupo=2) o lo elige el invitado según el mensaje que recibió
+const cupoUrl=parseInt(new URLSearchParams(location.search).get('cupo'),10);
+let cupo=(cupoUrl>=1&&cupoUrl<=8)?cupoUrl:1;
+const acomp=$('#acomp'), lista=$('#acompLista');
+function pintarCupo(){
+  const prev=[...lista.querySelectorAll('input')].map(i=>i.value);
+  lista.innerHTML='';
+  for(let i=0;i<cupo-1;i++){
+    const inp=document.createElement('input'); inp.type='text'; inp.placeholder='Acompañante '+(i+1)+': nombre y apellido';
+    inp.setAttribute('aria-label','Nombre del acompañante '+(i+1)); inp.value=prev[i]||''; lista.appendChild(inp);
+  }
+  acomp.style.display=cupo>1?'block':'none';
+}
+if(cupoUrl>=1&&cupoUrl<=8){
+  $('#cupoElige').hidden=true; const f=$('#cupoFijo'); f.hidden=false;
+  f.innerHTML='Tu invitación tiene cupo para <b>'+cupo+' '+(cupo===1?'persona':'personas')+'</b>';
+}else{
+  document.querySelectorAll('input[name=cupo]').forEach(r=>r.addEventListener('change',()=>{ cupo=+r.value; pintarCupo(); }));
+}
+pintarCupo();
 document.querySelectorAll('input[name=vas]').forEach(r=>r.addEventListener('change',()=>{
   $('#extraSi').classList.toggle('ver', document.querySelector('input[name=vas]:checked').value==='si'); }));
 $('#form').addEventListener('submit', e=>{
@@ -664,10 +710,12 @@ $('#form').addEventListener('submit', e=>{
   const va=document.querySelector('input[name=vas]:checked').value==='si';
   const dest=document.querySelector('input[name=dest]:checked').value;
   const extra=$('#aviso').value.trim();
+  const nombres=[nombre,...[...lista.querySelectorAll('input')].map(i=>i.value.trim()).filter(Boolean)].slice(0,cupo);
+  const n=nombres.length;
   let msg = va
-    ? `¡Hola! Soy ${nombre} 💚 Confirmo mi asistencia a la boda de Adrián y Fernanda el 19 de diciembre. Asistiremos ${n} ${n===1?'persona':'personas'}.`
+    ? `¡Hola! Soy ${nombre} 💚 Confirmo asistencia a la boda de Adrián y Fernanda el 19 de diciembre.\nCupo: ${cupo}. ${n===1?'Asistiré solo yo':'Asistiremos '+n+' personas'}:\n`+nombres.map((x,i)=>`${i+1}. ${x}`).join('\n')
     : `¡Hola! Soy ${nombre} 💌 Les agradezco mucho la invitación a su boda, lamentablemente no podré acompañarlos. ¡Les deseo toda la felicidad!`;
-  if(va && extra) msg += ` Nota: ${extra}`;
+  if(va && extra) msg += `\nNota: ${extra}`;
   const url='https://wa.me/'+dest+'?text='+encodeURIComponent(msg);
   $('#form').style.display='none';
   $('#gracias').classList.add('ver');
@@ -675,7 +723,7 @@ $('#form').addEventListener('submit', e=>{
   $('#graciasTxt').textContent = va
     ? 'Si WhatsApp no se abrió solo, toca el botón de abajo.'
     : 'Gracias por avisarnos, te llevamos en el corazón.';
-  if(va) lanzarHojas(80);
+  if(va) lanzarHojas(22);
   window.open(url,'_blank','noopener');
 });
 $('#otra').addEventListener('click',()=>{ $('#gracias').classList.remove('ver'); $('#form').style.display='block'; });
