@@ -15,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Pinyon+Script&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --verde:#5f6e2a; --verde-h:#4f5c22; --verde-claro:#c3cf78; --salvia:#efe6d2; --crema:#f1e8d4; --papel:#f6efdf;
+  --verde:#53582f; --verde-h:#454a27; --verde-claro:#c5ca94; --salvia:#efe6d2; --crema:#f1e8d4; --papel:#f6efdf;
   --cafe:#33231a; --cafe-2:#57402f; --oro:#c2a060;
   --serif:'Cormorant Garamond',Georgia,serif; --script:'Pinyon Script',cursive; --sans:'Jost',system-ui,sans-serif;
 }
@@ -29,7 +29,7 @@ button{font:inherit}
 .sans{font-family:var(--sans);letter-spacing:.28em;text-transform:uppercase;font-size:.7rem;font-weight:400}
 
 /* ===== SOBRE ===== */
-#sobre{position:fixed;inset:0;z-index:100;background:#5f6e2a url('tex-verde.jpg') repeat;background-size:512px;display:grid;place-items:center;
+#sobre{position:fixed;inset:0;z-index:100;background:#53582f url('tex-verde.jpg') repeat;background-size:512px;display:grid;place-items:center;
   transition:opacity .9s ease .6s,visibility 0s linear 1.6s;overflow:hidden}
 #sobre::before{content:"";position:absolute;inset:0;background:
   radial-gradient(1200px 700px at 20% 10%,rgba(255,255,255,.16),transparent 60%),
@@ -106,6 +106,11 @@ section>.wrap,section>.carril{position:relative;z-index:1}
 @media (min-width:900px){#banda2 .foto{background-position:50% 55%}
   #hero .foto{background-position:50% 22%}#hero .foto video{object-position:50% 22%}}
 
+.doble{display:block;width:min(100%,540px);height:auto;margin:0 auto 26px;mix-blend-mode:multiply;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent),linear-gradient(to bottom,transparent,#000 7%,#000 88%,transparent);
+  -webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent),linear-gradient(to bottom,transparent,#000 7%,#000 88%,transparent);mask-composite:intersect}
+@media (min-width:900px){.doble{width:min(100%,600px)}}
+
 /* ===== HERO ===== */
 #hero{min-height:100svh;padding:0;display:grid;place-items:end center;color:#fff;overflow:hidden;background:var(--cafe)}
 #hero .foto{position:absolute;inset:0;background:url('hero.jpg') center 30%/cover no-repeat}
@@ -147,7 +152,7 @@ section>.wrap,section>.carril{position:relative;z-index:1}
   text-shadow:0 3px 22px rgba(0,0,0,.4)}
 
 /* ===== CUENTA REGRESIVA ===== */
-#cuenta{background:#5f6e2a url('tex-verde.jpg') repeat;background-size:512px;color:#f7f1df;overflow:hidden}
+#cuenta{background:#53582f url('tex-verde.jpg') repeat;background-size:512px;color:#f7f1df;overflow:hidden}
 #cuenta .titulo,#cuenta .eyebrow{color:#f5f1e6}
 .reloj{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:32px 0 8px}
 .caja{background:rgba(52,38,28,.9);border-radius:14px;padding:18px 4px 12px;position:relative;
@@ -229,7 +234,7 @@ section>.wrap,section>.carril{position:relative;z-index:1}
 #lb .prev{left:12px}#lb .next{right:12px}
 
 /* ===== RSVP ===== */
-#rsvp{background:#5f6e2a url('tex-verde.jpg') repeat;background-size:512px;color:#f7f1df}
+#rsvp{background:#53582f url('tex-verde.jpg') repeat;background-size:512px;color:#f7f1df}
 #rsvp .titulo,#rsvp .eyebrow{color:#f5f1e6}
 .form{background:#f6efdf url('tex-papel.jpg') repeat;background-size:512px;color:var(--cafe);border-radius:22px;padding:30px 22px;margin-top:26px;
   box-shadow:0 20px 46px rgba(30,20,12,.3);text-align:left}
@@ -311,8 +316,8 @@ section>.wrap,section>.carril{position:relative;z-index:1}
 
 <!-- INVITACIÓN -->
 <section id="texto">
-  <div class="velo" style="--img:url('g6.jpg');--pos:50% 32%;--posd:88% 28%"></div>
   <div class="wrap">
+    <img class="doble rev" src="doble.jpg" width="1200" height="1600" alt="Doble exposición: Adrián y Fernanda de perfil y, dentro de su silueta, los dos caminando de la mano">
     <p class="rev">Con gran alegría y agradecidos con Dios, los invitamos a compartir el día en que unimos nuestras vidas en matrimonio.</p>
     <div class="divisor rev d1"><i>♥</i></div>
     <h2 class="nombres-grandes rev d1">Adrián <span class="amp">&amp;</span> Fernanda</h2>
@@ -399,7 +404,7 @@ section>.wrap,section>.carril{position:relative;z-index:1}
     <div class="paleta rev d2">
       <div class="tono"><i class="no" style="background:#fbfaf5"></i><small>Blanco<br>(la novia)</small></div>
       <div class="tono"><i class="no" style="background:#5a4334"></i><small>Café<br>(los novios)</small></div>
-      <div class="tono"><i class="no" style="background:#5f6e2a"></i><small>Verde<br>(los novios)</small></div>
+      <div class="tono"><i class="no" style="background:#53582f"></i><small>Verde<br>(los novios)</small></div>
     </div>
     <p class="nota rev d3">Cualquier otro color es bienvenido.</p>
   </div>
@@ -499,13 +504,13 @@ section>.wrap,section>.carril{position:relative;z-index:1}
 <g id="colgSvg" fill="none" stroke="#e9dfc4" stroke-width="1.1" stroke-linecap="round"><path d="M30 0 C38 75 21 150 33 250"/><path d="M32.7 18 q-13 3 -15 15 q12 -1 15 -15"/><path d="M32.7 27 q13 3 15 15 q-12 -1 -15 -15"/><path d="M35.4 42 q-13 3 -15 15 q12 -1 15 -15"/><path d="M35.4 51 q13 3 15 15 q-12 -1 -15 -15"/><path d="M35.9 66 q-13 3 -15 15 q12 -1 15 -15"/><path d="M35.9 75 q13 3 15 15 q-12 -1 -15 -15"/><path d="M34.2 90 q-13 3 -15 15 q12 -1 15 -15"/><path d="M34.2 99 q13 3 15 15 q-12 -1 -15 -15"/><path d="M30.8 114 q-13 3 -15 15 q12 -1 15 -15"/><path d="M30.8 123 q13 3 15 15 q-12 -1 -15 -15"/><path d="M27.2 138 q-13 3 -15 15 q12 -1 15 -15"/><path d="M27.2 147 q13 3 15 15 q-12 -1 -15 -15"/><path d="M24.6 162 q-13 3 -15 15 q12 -1 15 -15"/><path d="M24.6 171 q13 3 15 15 q-12 -1 -15 -15"/><path d="M24.1 186 q-13 3 -15 15 q12 -1 15 -15"/><path d="M24.1 195 q13 3 15 15 q-12 -1 -15 -15"/><path d="M25.9 210 q-13 3 -15 15 q12 -1 15 -15"/><path d="M25.9 219 q13 3 15 15 q-12 -1 -15 -15"/><path d="M29.3 234 q-13 3 -15 15 q12 -1 15 -15"/><path d="M29.3 243 q13 3 15 15 q-12 -1 -15 -15"/><path d="M62 0 C70 99 53 198 65 330"/><path d="M68.0 18 q-13 3 -15 15 q12 -1 15 -15"/><path d="M68.0 27 q13 3 15 15 q-12 -1 -15 -15"/><path d="M67.2 42 q-13 3 -15 15 q12 -1 15 -15"/><path d="M67.2 51 q13 3 15 15 q-12 -1 -15 -15"/><path d="M64.4 66 q-13 3 -15 15 q12 -1 15 -15"/><path d="M64.4 75 q13 3 15 15 q-12 -1 -15 -15"/><path d="M60.7 90 q-13 3 -15 15 q12 -1 15 -15"/><path d="M60.7 99 q13 3 15 15 q-12 -1 -15 -15"/><path d="M57.5 114 q-13 3 -15 15 q12 -1 15 -15"/><path d="M57.5 123 q13 3 15 15 q-12 -1 -15 -15"/><path d="M56.0 138 q-13 3 -15 15 q12 -1 15 -15"/><path d="M56.0 147 q13 3 15 15 q-12 -1 -15 -15"/><path d="M56.9 162 q-13 3 -15 15 q12 -1 15 -15"/><path d="M56.9 171 q13 3 15 15 q-12 -1 -15 -15"/><path d="M59.7 186 q-13 3 -15 15 q12 -1 15 -15"/><path d="M59.7 195 q13 3 15 15 q-12 -1 -15 -15"/><path d="M63.4 210 q-13 3 -15 15 q12 -1 15 -15"/><path d="M63.4 219 q13 3 15 15 q-12 -1 -15 -15"/><path d="M66.6 234 q-13 3 -15 15 q12 -1 15 -15"/><path d="M66.6 243 q13 3 15 15 q-12 -1 -15 -15"/><path d="M68.0 258 q-13 3 -15 15 q12 -1 15 -15"/><path d="M68.0 267 q13 3 15 15 q-12 -1 -15 -15"/><path d="M67.1 282 q-13 3 -15 15 q12 -1 15 -15"/><path d="M67.1 291 q13 3 15 15 q-12 -1 -15 -15"/><path d="M64.2 306 q-13 3 -15 15 q12 -1 15 -15"/><path d="M64.2 315 q13 3 15 15 q-12 -1 -15 -15"/><path d="M96 0 C104 60 87 120 99 200"/><path d="M99.7 18 q-13 3 -15 15 q12 -1 15 -15"/><path d="M99.7 27 q13 3 15 15 q-12 -1 -15 -15"/><path d="M96.2 42 q-13 3 -15 15 q12 -1 15 -15"/><path d="M96.2 51 q13 3 15 15 q-12 -1 -15 -15"/><path d="M92.6 66 q-13 3 -15 15 q12 -1 15 -15"/><path d="M92.6 75 q13 3 15 15 q-12 -1 -15 -15"/><path d="M90.4 90 q-13 3 -15 15 q12 -1 15 -15"/><path d="M90.4 99 q13 3 15 15 q-12 -1 -15 -15"/><path d="M90.2 114 q-13 3 -15 15 q12 -1 15 -15"/><path d="M90.2 123 q13 3 15 15 q-12 -1 -15 -15"/><path d="M92.4 138 q-13 3 -15 15 q12 -1 15 -15"/><path d="M92.4 147 q13 3 15 15 q-12 -1 -15 -15"/><path d="M95.9 162 q-13 3 -15 15 q12 -1 15 -15"/><path d="M95.9 171 q13 3 15 15 q-12 -1 -15 -15"/><path d="M99.4 186 q-13 3 -15 15 q12 -1 15 -15"/><path d="M99.4 195 q13 3 15 15 q-12 -1 -15 -15"/><path d="M124 0 C132 87 115 174 127 290"/><path d="M122.0 18 q-13 3 -15 15 q12 -1 15 -15"/><path d="M122.0 27 q13 3 15 15 q-12 -1 -15 -15"/><path d="M119.1 42 q-13 3 -15 15 q12 -1 15 -15"/><path d="M119.1 51 q13 3 15 15 q-12 -1 -15 -15"/><path d="M118.0 66 q-13 3 -15 15 q12 -1 15 -15"/><path d="M118.0 75 q13 3 15 15 q-12 -1 -15 -15"/><path d="M119.2 90 q-13 3 -15 15 q12 -1 15 -15"/><path d="M119.2 99 q13 3 15 15 q-12 -1 -15 -15"/><path d="M122.3 114 q-13 3 -15 15 q12 -1 15 -15"/><path d="M122.3 123 q13 3 15 15 q-12 -1 -15 -15"/><path d="M126.0 138 q-13 3 -15 15 q12 -1 15 -15"/><path d="M126.0 147 q13 3 15 15 q-12 -1 -15 -15"/><path d="M129.0 162 q-13 3 -15 15 q12 -1 15 -15"/><path d="M129.0 171 q13 3 15 15 q-12 -1 -15 -15"/><path d="M130.0 186 q-13 3 -15 15 q12 -1 15 -15"/><path d="M130.0 195 q13 3 15 15 q-12 -1 -15 -15"/><path d="M128.7 210 q-13 3 -15 15 q12 -1 15 -15"/><path d="M128.7 219 q13 3 15 15 q-12 -1 -15 -15"/><path d="M125.6 234 q-13 3 -15 15 q12 -1 15 -15"/><path d="M125.6 243 q13 3 15 15 q-12 -1 -15 -15"/><path d="M121.9 258 q-13 3 -15 15 q12 -1 15 -15"/><path d="M121.9 267 q13 3 15 15 q-12 -1 -15 -15"/></g>
   <g id="ramaSvg">
     <path d="M10 190 C60 140 90 90 190 20" stroke="#8a7a5f" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-    <g fill="#8a9a3c" opacity=".92">
+    <g fill="#7b8350" opacity=".92">
       <ellipse cx="42" cy="152" rx="9" ry="19" transform="rotate(-48 42 152)"/>
-      <ellipse cx="62" cy="128" rx="9" ry="20" transform="rotate(32 62 128)" fill="#5f6e2a"/>
+      <ellipse cx="62" cy="128" rx="9" ry="20" transform="rotate(32 62 128)" fill="#53582f"/>
       <ellipse cx="82" cy="108" rx="9" ry="19" transform="rotate(-50 82 108)"/>
-      <ellipse cx="104" cy="88" rx="9" ry="20" transform="rotate(30 104 88)" fill="#5f6e2a"/>
+      <ellipse cx="104" cy="88" rx="9" ry="20" transform="rotate(30 104 88)" fill="#53582f"/>
       <ellipse cx="126" cy="68" rx="8.5" ry="18" transform="rotate(-52 126 68)"/>
-      <ellipse cx="150" cy="50" rx="8.5" ry="18" transform="rotate(28 150 50)" fill="#5f6e2a"/>
+      <ellipse cx="150" cy="50" rx="8.5" ry="18" transform="rotate(28 150 50)" fill="#53582f"/>
       <ellipse cx="172" cy="34" rx="8" ry="16" transform="rotate(-50 172 34)"/>
     </g>
   </g>
@@ -576,7 +581,7 @@ let W,H,dpr;
 function medir(){ dpr=Math.min(devicePixelRatio||1,2); W=cv.width=innerWidth*dpr; H=cv.height=innerHeight*dpr;
   cv.style.width=innerWidth+'px'; cv.style.height=innerHeight+'px'; }
 medir(); addEventListener('resize',medir);
-const colores=['#7d8f2f','#5f6e2a','#a8b84c','#4d5a22','#cfa650'];
+const colores=['#6f7742','#53582f','#8f975c','#454a27','#c2a060'];
 let hojas=[];
 const nueva = (arriba=true) => ({ x:Math.random()*W, y: arriba? -20*dpr : Math.random()*H,
   s:(7+Math.random()*10)*dpr, v:(.5+Math.random()*1.1)*dpr, sw:Math.random()*6.28, sv:.01+Math.random()*.02,
