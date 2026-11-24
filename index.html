@@ -65,6 +65,14 @@ button{font:inherit}
 
 #hojas{position:fixed;inset:0;pointer-events:none;z-index:50}
 
+#btnMusica{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:60;width:46px;height:46px;border-radius:50%;
+  border:1px solid rgba(245,241,230,.5);background:rgba(51,35,26,.86);color:#f5f1e6;font-size:1.25rem;cursor:pointer;
+  box-shadow:0 8px 20px rgba(30,20,12,.35);display:grid;place-items:center}
+#btnMusica[hidden]{display:none}
+#btnMusica.off span{opacity:.45;text-decoration:line-through}
+#btnMusica:not(.off){animation:pulsoM 2.6s ease-in-out infinite}
+@keyframes pulsoM{50%{box-shadow:0 0 0 9px rgba(194,160,96,.16),0 8px 20px rgba(30,20,12,.35)}}
+
 /* ===== BASE ===== */
 main{position:relative;z-index:2}
 section{position:relative;padding:92px 24px;text-align:center}
@@ -302,6 +310,8 @@ section>.wrap,section>.carril{position:relative;z-index:1}
 </div>
 
 <canvas id="hojas"></canvas>
+<audio id="musica" src="musica.mp3" loop preload="none"></audio>
+<button id="btnMusica" type="button" aria-label="Silenciar la música" aria-pressed="true" hidden><span aria-hidden="true">♪</span></button>
 
 <main>
 <!-- HERO -->
@@ -590,6 +600,14 @@ lb.addEventListener('click', e => { if(e.target===lb||e.target===lbImg) cerrar()
 addEventListener('keydown', e => { if(!lb.classList.contains('ver')) return;
   if(e.key==='Escape') cerrar(); if(e.key==='ArrowRight') ver(idx+1); if(e.key==='ArrowLeft') ver(idx-1); });
 
+// ====== MÚSICA (arranca al tocar el sello; el botón la silencia) ======
+const musica=$('#musica'), btnM=$('#btnMusica'); let fadeM=null, quiereMusica=true;
+function subir(hasta){ clearInterval(fadeM); fadeM=setInterval(()=>{ musica.volume=Math.min(hasta,musica.volume+0.03); if(musica.volume>=hasta) clearInterval(fadeM); },120); }
+function sonar(){ musica.volume=0; const pr=musica.play(); if(pr) pr.then(()=>{ subir(0.5); btnM.classList.remove('off'); btnM.setAttribute('aria-pressed','true'); }).catch(()=>{ btnM.classList.add('off'); }); }
+function callar(){ clearInterval(fadeM); musica.pause(); btnM.classList.add('off'); btnM.setAttribute('aria-pressed','false'); }
+btnM.addEventListener('click',()=>{ quiereMusica=musica.paused; quiereMusica?sonar():callar(); });
+document.addEventListener('visibilitychange',()=>{ if(document.hidden){ clearInterval(fadeM); musica.pause(); } else if(quiereMusica && !btnM.hidden){ sonar(); } });
+
 // ====== SOBRE ======
 const sobre=$('#sobre');
 function abrir(){
@@ -597,6 +615,7 @@ function abrir(){
   document.body.classList.remove('bloqueado');
   window.scrollTo(0,0);
   lanzarHojas(16);
+  btnM.hidden=false; sonar();
   setTimeout(()=>sobre.setAttribute('aria-hidden','true'),1800);
 }
 $('#abrir').addEventListener('click',abrir);
